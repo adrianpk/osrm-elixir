@@ -43,8 +43,8 @@ defmodule OSRM.Mixfile do
   #
   # Type "mix help deps" for more examples and options
   defp deps do
-    [{:httpoison, "~> 0.11"},
-     {:poison, "~> 3.0"},
+    [{:httpoison, "~> 1.4"},
+     {:poison, "~> 4.0"},
      # Local dependencies
      {:credo, "~> 0.6", only: [:dev, :test ]},
      {:ex_doc, "~> 0.15", only: [:dev, :test]},]
