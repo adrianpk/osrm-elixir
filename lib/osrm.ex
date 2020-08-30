@@ -3,9 +3,11 @@ defmodule OSRM do
   Provides bindings for OSRM REST API.
   """
 
-  @base_url :osrm |> Application.fetch_env!(__MODULE__) |> Keyword.get(:server_url)
-  @version  :osrm |> Application.fetch_env!(__MODULE__) |> Keyword.get(:version, "v1")
-  @profile  :osrm |> Application.fetch_env!(__MODULE__) |> Keyword.get(:profile, "car")
+  @base_url :osrm
+            |> Application.fetch_env!(__MODULE__)
+            |> Keyword.get(:server_url, "http://router.project-osrm.org")
+  @version :osrm |> Application.fetch_env!(__MODULE__) |> Keyword.get(:version, "v1")
+  @profile :osrm |> Application.fetch_env!(__MODULE__) |> Keyword.get(:profile, "car")
 
   defp coordinate_to_string([lng, lat]) do
     "#{lng},#{lat}"
@@ -73,7 +75,7 @@ defmodule OSRM do
     endpoint = format_url("route", coordinates)
 
     endpoint
-    |> HTTPoison.get([], [params: Enum.into(options, %{})])
+    |> HTTPoison.get([], params: Enum.into(options, %{}))
     |> parse_response()
   end
 end
